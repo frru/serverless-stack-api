@@ -145,3 +145,56 @@ To [override the default config](https://eslint.org/docs/user-guide/configuring)
 This repo is maintained by [Anomaly Innovations](https://anoma.ly); makers of [Seed](https://seed.run) and [Serverless Stack](https://serverless-stack.com).
 
 - Get: https://1wvst2bhd1.execute-api.us-east-1.amazonaws.com/dev/hello
+
+
+Pool ID us-east-2_aqKn06m3y
+Pool ARN arn:aws:cognito-idp:us-east-2:370977736224:userpool/us-east-2_aqKn06m3y
+
+应用程序客户端 ID
+5o5s9bob0tv1ga9ldj55da1fsh
+
+Amazon Cognito 域
+https://
+notes-app-fr
+.auth.us-east-2.amazoncognito.com
+
+aws cognito-idp sign-up \
+  --region us-east-2 \
+  --client-id 5o5s9bob0tv1ga9ldj55da1fsh \
+  --username 717373234@qq.com \
+  --password 12345678
+
+aws cognito-idp admin-confirm-sign-up \
+  --region us-east-2 \
+  --user-pool-id us-east-2_aqKn06m3y \
+  --username 717373234@qq.com
+
+S3 Bucket name:
+notes-app-uploads-fr
+AWS Region
+us-east-2
+
+
+Gateway Region: 就是部署时候跟在https后面的 6yavfm50m7
+
+Identity pool ID：us-east-2:f61e3b85-b9d7-4775-aff7-142428a546f2
+
+  POST - https://6yavfm50m7.execute-api.us-east-2.amazonaws.com/prod/notes
+  GET - https://6yavfm50m7.execute-api.us-east-2.amazonaws.com/prod/notes/{id}
+  GET - https://6yavfm50m7.execute-api.us-east-2.amazonaws.com/prod/notes
+  PUT - https://6yavfm50m7.execute-api.us-east-2.amazonaws.com/prod/notes/{id}
+  DELETE - https://6yavfm50m7.execute-api.us-east-2.amazonaws.com/prod/notes/{id}
+
+
+  npx aws-api-gateway-cli-test \
+--username='717373234@qq.com' \
+--password='12345678' \
+--user-pool-id='us-east-2_aqKn06m3y' \
+--app-client-id='5o5s9bob0tv1ga9ldj55da1fsh' \
+--cognito-region='us-east-2' \
+--identity-pool-id='us-east-2:f61e3b85-b9d7-4775-aff7-142428a546f2' \
+--invoke-url='https://6yavfm50m7.execute-api.us-east-2.amazonaws.com/prod' \
+--api-gateway-region='us-east-2' \
+--path-template='/notes' \
+--method='POST' \
+--body='{"content":"hello world","attachment":"hello.jpg"}'
